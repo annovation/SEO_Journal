@@ -25,9 +25,7 @@
                             <th>Post Title</th>
                             <th>Short Description</th>
                             <th>Description</th>
-                            <th>Author</th>
-                            <th>Featured</th>
-                            <th>Category</th>
+                            <th>Category ID</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -36,9 +34,7 @@
                                     <td>{{ $post->post_title }}</td>
                                     <td>{{ $post->short_description }}</td>
                                     <td>{{ $post->description }}</td>
-                                    <td>{{ $post->author_id }}</td>
-                                    <td>{{ $post->featured_post }}</td>
-                                    <td>{{ $post->category_id }}</td>
+                                    <td>{{ $post->category_id}}</td>
                                     <td>
                                         <a href="{{ route('posts.edit', $post) }}" type="button" class="btn btn-primary btn-xs">Edit</a>
                                         <a href="{{ route('posts.destroy', $post) }}" type="button" class="btn btn-danger btn-xs action_confirm" data-method="DELETE" data-token="{{ csrf_token() }}">Delete</a>

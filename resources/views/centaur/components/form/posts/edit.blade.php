@@ -4,7 +4,8 @@
     'class'     => $class ?? '',
     'method'    => $method ?? '',
     'param'     => $param ?? '',
-    'route'     => $route ?? ''
+    'route'     => $route ?? '',
+    'categories' => $categories ?? ''
 ])
     @slot('csrf')
         @csrf
@@ -34,17 +35,16 @@
                 @enderror
         </div>
 
-        <div class="form-group @error('featured_post') has-error @enderror">
-                <label for="featured_post">Featured article*</label>
-                <input class="form-control" name="featured_post" id="featured_post" type="checkbox" value="{{ old('featured_post') }}">
-                @error('featured_post')
-                    <p class="text-danger">{{ $message }}</p>
-                @enderror
-        </div>
-
         <div class="form-group @error('category_id') has-error @enderror">
-                <label for="category_id">Category*</label>
-                {!! Form::select('category_id', $categories, $selectedCategory->$categories->id, ['class' => 'form-control']) !!}
+                <label for="category_id">Choose category*</label>
+                <select class="form-control" name="category_id" value="{{ old('category_id') }}">
+                    <option>Select category</option>
+                    @foreach($categories as $category_id => $category)
+                        <option value="{{ $category_id }}">
+                            {{ $category }}
+                        </option>
+                    @endforeach
+                </select>
                 @error('category_id')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror

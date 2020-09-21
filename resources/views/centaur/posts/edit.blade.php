@@ -1,25 +1,25 @@
 @extends('Centaur::layout',['navbar' => true])
 
-@section('title', 'Add New Article')
+@section('title', 'Edit Post')
 
 @section('content')
 <div class="row">
-    <div class="col-md-12 col-md-offset-0">
+    <div class="col-md-6 col-md-offset-3">
         @component('Centaur::components.panel.content', [
             'class' => 'panel-default',
             'heading' => [
                 'visible' => true,
-                'title' => 'Add New Article'
+                'title' => 'Edit Post'
             ],
             'body' => [
                 'visible' => true,
                 'component' => true,
                 'content' => [
                     [
-                        'component_path' => 'Centaur::components.form.posts.create',
+                        'component_path' => 'Centaur::components.form.posts.edit',
                         'component_options' => [
                         'method' => 'POST',
-                        'route' => 'posts.store',
+                        'route' => 'posts.update',
                         'param' => false,
                         'categories' => $categories
                         ]
@@ -31,6 +31,7 @@
                 'content' => ''
             ]
         ])
+
         @endcomponent
     </div>
 </div>

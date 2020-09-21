@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Redirect;
 
 use Illuminate\Support\Facades\Session;
 
+use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -40,7 +41,10 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::paginate(10);
-        return view('Centaur::posts.index', compact('posts'));
+        $categories = DB::table('categories')
+            ->join('posts', 'posts.category_id', '=', 'categories.id')
+            ->get();
+        return view('Centaur::posts.index', compact('posts','categories'));
     }
 
     /**
@@ -61,8 +65,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $categories = Category::pluck('category_name')->toArray();
-        dd($categories);
+        $categories = Category::pluck('category_name', 'id')->toArray();
         return view('Centaur::posts.create', compact('categories'));
     }
 
@@ -73,9 +76,20 @@ class PostController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function store()
+    public function store(PostRequest $request)
     {
+        $data = $request->except('_token');
+        $post = new Post();
+        try{
+            $newPost = $post->savePost($data);
+        } catch (Exception $e){
+            Session::flash('error', 'Something went wrong, please try again');
+            return Redirect::back();
+        }
 
+        Session::flash('success', 'You have successfully added a new post with ID:'.$newPost->id);
+
+        return Redirect::route('posts.index');
     }
 
 
@@ -85,9 +99,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Post $post)
     {
-        //
+        return view('Centaur::posts.show', compact('post'));
     }
 
     /**
@@ -96,9 +110,10 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        $categories = Category::pluck('category_name', 'id')->toArray();
+        return view('Centaur::posts.edit', compact('post','categories'));
     }
 
     /**
@@ -108,9 +123,20 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(PostRequest $request, Post $post)
     {
-        //
+        $data = $request->except(['_token', '_method']);
+        try{
+            $updatedPost = $post->updatePost($data);
+
+        } catch (Exception $e){
+            Session::flash('error', 'Something went wrong, please try again');
+            return Redirect::back();
+        }
+
+        Session::flash('success', 'You have successfully update post with ID:'.$post->id);
+
+        return Redirect::route('posts.index');
     }
 
     /**
@@ -121,6 +147,41 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::withTrashed()->findOrFail($id);
+
+        try{
+            $post->deletePost($id);
+
+        } catch (Exception $e){
+            Session::flash('error', 'Something went wrong, please try again');
+            return Redirect::back();
+        }
+
+        Session::flash('success', 'Post with ID:'.$post->id. ' has been deleted');
+
+        return Redirect::route('posts.index');
+    }
+
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function restore($id)
+    {
+        $post = Post::withTrashed()->findOrFail($id);
+        try{
+            $post->restore();
+
+        } catch (Exception $e){
+            Session::flash('error', 'Something went wrong, please try again');
+            return Redirect::back();
+        }
+
+        Session::flash('success', 'Post with ID:'.$post->id. ' has been successfully restored');
+
+        return Redirect::route('posts.index');
     }
 }

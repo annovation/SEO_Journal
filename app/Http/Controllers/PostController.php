@@ -16,7 +16,6 @@ use Illuminate\Support\Facades\Redirect;
 
 use Illuminate\Support\Facades\Session;
 
-use Illuminate\Support\Facades\DB;
 
 class PostController extends Controller
 {
@@ -41,10 +40,7 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::paginate(10);
-        $categories = DB::table('categories')
-            ->join('posts', 'posts.category_id', '=', 'categories.id')
-            ->get();
-        return view('Centaur::posts.index', compact('posts','categories'));
+        return view('Centaur::posts.index', compact('posts'));
     }
 
     /**

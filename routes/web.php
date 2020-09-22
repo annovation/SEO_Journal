@@ -56,3 +56,5 @@ Route::resource('posts', 'PostController');
 Route::get('posts/trash/all', 'PostController@trash')->name('posts.trash');
 Route::get('posts/restore/{id}', 'PostController@restore')->name('posts.restore');
 
+//Home
+Route::resource('home', 'HomeController');

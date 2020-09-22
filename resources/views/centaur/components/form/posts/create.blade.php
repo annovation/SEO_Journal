@@ -21,7 +21,7 @@
         </div>
 
         <div class="form-group @error('short_description') has-error @enderror">
-                <label for="short_description">Short description*</label> - up to 250 characters max.
+                <label for="short_description">Excerpt*</label> - up to 250 characters max.
                 <textarea class="form-control" name="short_description" id="short_description" value="{{ old('short_description') }}"></textarea>
                 @error('short_description')
                     <p class="text-danger">{{ $message }}</p>
@@ -29,8 +29,8 @@
         </div>
 
         <div class="form-group @error('description') has-error @enderror">
-                <label for="description">Description*</label>
-                <input class="form-control" name="description" id="description" type="text" value="{{ old('description') }}">
+                <label for="description">Article text*</label>
+                <textarea class="form-control tinymce-editor" name="description" id="description" type="text" value="{{ old('description') }}"></textarea>
                 @error('description')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -64,3 +64,24 @@
         </div>
     @endslot
 @endcomponent
+
+<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="https://cdn.tiny.cloud/1/no-api-key/tinymce/5/tinymce.min.js" referrerpolicy="origin"></script>
+<script type="text/javascript">
+    tinymce.init({
+        selector: 'textarea.tinymce-editor',
+        height: 100,
+        menubar: false,
+        plugins: [
+            'advlist autolink lists link image charmap print preview anchor',
+            'searchreplace visualblocks code fullscreen',
+            'insertdatetime media table paste code help wordcount'
+        ],
+        toolbar: 'undo redo | formatselect | ' +
+            'bold italic backcolor | alignleft aligncenter ' +
+            'alignright alignjustify | bullist numlist outdent indent | ' +
+            'removeformat | help',
+        content_css: '//www.tiny.cloud/css/codepen.min.css'
+    });
+</script>

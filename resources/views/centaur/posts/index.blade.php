@@ -34,7 +34,7 @@
                                     <td>{{ $post->post_title }}</td>
                                     <td>{{ $post->short_description }}</td>
                                     <td>{{ $post->description }}</td>
-                                    <td>{{ $post->category_id}}</td>
+                                    <td>{{ $categoryName }}</td>
                                     <td>
                                         <a href="{{ route('posts.edit', $post) }}" type="button" class="btn btn-primary btn-xs">Edit</a>
                                         <a href="{{ route('posts.destroy', $post) }}" type="button" class="btn btn-danger btn-xs action_confirm" data-method="DELETE" data-token="{{ csrf_token() }}">Delete</a>

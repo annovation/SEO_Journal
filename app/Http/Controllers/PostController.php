@@ -40,7 +40,8 @@ class PostController extends Controller
     public function index()
     {
         $posts = Post::paginate(10);
-        return view('Centaur::posts.index', compact('posts'));
+        $categoryName = Post::find(5)->category->category_name;
+        return view('Centaur::posts.index', compact('posts', 'categoryName'));
     }
 
     /**

@@ -56,4 +56,14 @@ class Category extends Model
 
         $this->delete();
     }
+
+    /**
+     * Relacija
+     *
+     * @return void
+     */
+    public function post()
+    {
+        return $this->hasMany(Post::class);
+    }
 }

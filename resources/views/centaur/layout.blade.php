@@ -33,8 +33,9 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav">
-                        <li class="{{ Request::is('/dashboard') ? 'active' : '' }}"><a href="{{ route('dashboard') }}">Dashboard</a></li>
+                        <li class="{{ Request::is('/home') ? 'active' : '' }}"><a href="{{ route('home') }}">Home</a></li>
                         @if (Sentinel::check() && Sentinel::inRole('administrator'))
+                            <li class="{{ Request::is('/dashboard') ? 'active' : '' }}"><a href="{{ route('dashboard') }}">Dashboard</a></li>
                             <li class="{{ Request::is('users*') ? 'active' : '' }}"><a href="{{ route('users.index') }}">Users</a></li>
                             <li class="{{ Request::is('roles*') ? 'active' : '' }}"><a href="{{ route('roles.index') }}">Roles</a></li>
                             <li class="{{ Request::is('categories*') ? 'active' : '' }}"><a href="{{ route('categories.index') }}">Categories</a></li>

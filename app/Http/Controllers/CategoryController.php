@@ -21,10 +21,10 @@ class CategoryController extends Controller
     {
         // Middleware
         $this->middleware('sentinel.auth');
-        $this->middleware('sentinel.access:users.create', ['only' => ['create', 'store']]);
-        $this->middleware('sentinel.access:users.view', ['only' => ['index', 'show', 'trash']]);
-        $this->middleware('sentinel.access:users.update', ['only' => ['edit', 'update']]);
-        $this->middleware('sentinel.access:users.destroy', ['only' => ['destroy']]);
+        $this->middleware('sentinel.access:categories.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel.access:categories.view', ['only' => ['index', 'show', 'trash']]);
+        $this->middleware('sentinel.access:categories.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel.access:categories.delete', ['only' => ['delete']]);
 
     }
 
@@ -58,6 +58,7 @@ class CategoryController extends Controller
      */
     public function create()
     {
+        $categories = Category::pluck('category_name', 'id')->toArray();
         return view('Centaur::categories.create');
     }
 

@@ -12,7 +12,7 @@
     @slot('elements')
         <div class="form-group @error('category_name') has-error @enderror">
             <label for="category_name">Category Name*</label>
-            <input class="form-control" name="category_name" id="category_name" type="text" value="{{ $param->category_name }}">
+            <input class="form-control" name="category_name" id="category_name" type="text" value="{{ $param->category }}">
             @error('city')
                 <p class="text-danger">{{ $message }}</p>
             @enderror

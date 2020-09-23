@@ -20,7 +20,7 @@
                         'component_options' => [
                         'method' => 'POST',
                         'route' => 'posts.update',
-                        'param' => false,
+                        'param' => $post,
                         'categories' => $categories
                         ]
                     ]

@@ -24,17 +24,15 @@
                         <tr>
                             <th>Post Title</th>
                             <th>Short Description</th>
-                            <th>Description</th>
-                            <th>Category ID</th>
+                            <th>Category</th>
                         </tr>
                     </thead>
                     <tbody>
                         @foreach ($posts as $post)
                             <tr>
-                                    <td>{{ $post->post_title }}</td>
+                                    <td><b>{{ $post->post_title }}</b></td>
                                     <td>{{ $post->short_description }}</td>
-                                    <td>{{ $post->description }}</td>
-                                    <td>{{ $categoryName }}</td>
+                                    <td><b>{{ $post->category->category_name }}</b></td>
                                     <td>
                                         <a href="{{ route('posts.edit', $post) }}" type="button" class="btn btn-primary btn-xs">Edit</a>
                                         <a href="{{ route('posts.destroy', $post) }}" type="button" class="btn btn-danger btn-xs action_confirm" data-method="DELETE" data-token="{{ csrf_token() }}">Delete</a>
@@ -43,7 +41,7 @@
                         @endforeach
                     </tbody>
                 </table>
-                {{$posts->links()}}
+
             </div>
         </div>
     </div>

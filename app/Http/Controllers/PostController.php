@@ -23,11 +23,10 @@ class PostController extends Controller
     public function __construct()
     {
         // Middleware
-        $this->middleware('sentinel.auth');
-        $this->middleware('sentinel.access:users.create', ['only' => ['create', 'store']]);
-        $this->middleware('sentinel.access:users.view', ['only' => ['index', 'show', 'trash']]);
-        $this->middleware('sentinel.access:users.update', ['only' => ['edit', 'update']]);
-        $this->middleware('sentinel.access:users.destroy', ['only' => ['destroy']]);
+        $this->middleware('sentinel.access:posts.create', ['only' => ['create', 'store']]);
+        $this->middleware('sentinel.access:posts.view', ['only' => ['index', 'trash']]);
+        $this->middleware('sentinel.access:posts.update', ['only' => ['edit', 'update']]);
+        $this->middleware('sentinel.access:posts.delete', ['only' => ['delete']]);
 
     }
 
@@ -39,9 +38,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::paginate(10);
-        $categoryName = Post::find(5)->category->category_name;
-        return view('Centaur::posts.index', compact('posts', 'categoryName'));
+        $posts = Post::with('category')->get();
+        return view('Centaur::posts.index', compact('posts'));
     }
 
     /**

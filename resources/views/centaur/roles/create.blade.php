@@ -23,6 +23,7 @@
 
                     <h5>Permissions:</h5>
                     <div class="checkbox">
+                            <h5>Users</h5>
                         <label>
                             <input type="checkbox" name="permissions[users.create]" value="1">
                             users.create
@@ -47,6 +48,7 @@
                         </label>
                     </div>
                     <div class="checkbox">
+                        <h5>Roles</h5>
                         <label>
                             <input type="checkbox" name="permissions[roles.create]" value="1">
                             roles.create
@@ -70,6 +72,82 @@
                             roles.delete
                         </label>
                     </div>
+                    <div class="checkbox">
+                        <h5>Posts</h5>
+                        <label>
+                            <input type="checkbox" name="permissions[posts.create]" value="1">
+                            posts.create
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="permissions[posts.update]" value="1">
+                            posts.update
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="permissions[posts.view]" value="1">
+                            posts.view
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="permissions[posts.delete]" value="1">
+                            posts.delete
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <h5>Categories</h5>
+                        <label>
+                            <input type="checkbox" name="permissions[categories.create]" value="1">
+                            categories.create
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="permissions[categories.update]" value="1">
+                            categories.update
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="permissions[categories.view]" value="1">
+                            categories.view
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <label>
+                            <input type="checkbox" name="permissions[categories.delete]" value="1">
+                            categories.delete
+                        </label>
+                    </div>
+                    <div class="checkbox">
+                        <h5>Home</h5>
+                            <label>
+                                <input type="checkbox" name="permissions[home.create]" value="1">
+                                home.create
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="permissions[home.update]" value="1">
+                                home.update
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="permissions[home.view]" value="1">
+                                home.view
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="permissions[home.delete]" value="1">
+                                home.delete
+                            </label>
+                        </div>
+
                     <input name="_token" value="{{ csrf_token() }}" type="hidden">
                     <input class="btn btn-lg btn-primary btn-block" type="submit" value="Create">
                 </fieldset>

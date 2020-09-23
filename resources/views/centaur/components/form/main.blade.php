@@ -5,7 +5,7 @@
     name="{{ $name ?? '' }}"
     class="{{ $class ?? '' }}"
     method="{{ $method ?? '' }}"
-    action="{{ $param ? route($route, $param, $categories) : route($route, $categories) }}"
+    action="{{ $param ? route($route, $param) : route($route) }}"
     enctype = "{{ $enctype ?? 'application/x-www-form-urlencoded'}}"
 >
     {{ $csrf ?? '' }}

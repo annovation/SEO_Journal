@@ -13,7 +13,7 @@
     @slot('elements')
     <div class="form-group @error('post_title') has-error @enderror">
             <label for="post_title">Article Title*</label>
-            <input class="form-control" name="post_title" id="post_title" type="text" value="{{ old('post_title') }}">
+            <input class="form-control" name="post_title" id="post_title" type="text" value="{{ $param->post_title }}">
             @error('post_title')
                 <p class="text-danger">{{ $message }}</p>
             @enderror
@@ -21,7 +21,7 @@
 
         <div class="form-group @error('short_description') has-error @enderror">
                 <label for="short_description">Short description*</label>
-                <input class="form-control" name="short_description" id="short_description" type="text" value="{{ old('short_description') }}">
+                <input class="form-control" name="short_description" id="short_description" type="text" value="{{ $param->short_description }}">
                 @error('short_description')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror
@@ -29,7 +29,7 @@
 
         <div class="form-group @error('description') has-error @enderror">
                 <label for="description">Description*</label>
-                <input class="form-control" name="description" id="description" type="text" value="{{ old('description') }}">
+                <input class="form-control" name="description" id="description" type="text" value="{{ $param->description }}">
                 @error('description')
                     <p class="text-danger">{{ $message }}</p>
                 @enderror

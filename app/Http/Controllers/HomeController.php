@@ -16,18 +16,6 @@ use Illuminate\Support\Facades\Session;
 class HomeController extends Controller
 {
 
-    public function __construct()
-    {
-        // Middleware
-        $this->middleware('sentinel.auth');
-        $this->middleware('sentinel.access:users.create', ['only' => ['create', 'store']]);
-        $this->middleware('sentinel.access:users.view', ['only' => ['index', 'show', 'trash']]);
-        $this->middleware('sentinel.access:users.update', ['only' => ['edit', 'update']]);
-        $this->middleware('sentinel.access:users.destroy', ['only' => ['destroy']]);
-
-    }
-
-
     /**
      * Display a listing of the resource.
      *
@@ -36,6 +24,7 @@ class HomeController extends Controller
     public function index()
     {
         $posts = Post::paginate(10);
-        return view('Centaur::home', compact('posts'));
+        $categoryName = Post::first()->category->category_name;
+        return view('Centaur::home', compact('posts','categoryName'));
     }
 }
